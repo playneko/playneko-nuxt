@@ -28,14 +28,14 @@ export default {
           property: 'firstName',
           title: 'First Name',
           direction: null,
-          isChildren: true,
+          _hasChildren: true,
         },
         {
           property: 'lastName',
           title: 'Last Name',
           direction: null,
           collapseIcon: true,
-          isChildren: true,
+          _hasChildren: true,
         },
       ],
       rows: [
@@ -43,121 +43,62 @@ export default {
             firstName: 'Josephine',
             lastName: 'Astrid',
             _hasChildren: true,
-            isOpen: false,
-            isChildren: true,
         },
         {
             firstName: 'Boudewijn',
             lastName: 'Van Brabandt',
-            isOpen: false,
-            isChildren: true,
+            _hasChildren: true,
         },
         {
             firstName: 'Albert II',
             lastName: 'Van Belgie1',
-            isOpen: false,
-            isChildren: true,
-            _children: [
-                {
-                    firstName: 'Filip',
-                    lastName: 'Van Belgie2',
-                    isOpen: false,
-                    isChildren: true,
-                    _children: [
-                        {
-                            firstName: 'Elisabeth',
-                            lastName: 'Van Brabant',
-                            isOpen: false,
-                            isChildren: true,
-                        },
-                        {
-                            firstName: 'Gabriel',
-                            lastName: 'Boudwijn',
-                            isOpen: false,
-                            isChildren: true,
-                        },
-                        {
-                            firstName: 'Emmanuel',
-                            lastName: 'Van Belgie',
-                            isOpen: false,
-                            isChildren: true,
-                        },
-                        {
-                            firstName: 'Eleonore',
-                            lastName: 'Boudwijn',
-                            isChildren: true,
-                            _hasChildren: true,
-                        },
-                    ],
-                },
-                {
-                    firstName: 'Astrid',
-                    lastName: 'Van Belgie',
-                    isOpen: false,
-                    isChildren: true,
-                },
-                {
-                    firstName: 'Laurent',
-                    lastName: 'Van Belgie',
-                    isOpen: false,
-                    isChildren: true,
-                },
-
-            ],
+            _hasChildren: true,
+            _children: [],
         },
         {
-            firstName: 'Alexander',
-            lastName: 'Van Belgie',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Alexander',
+          lastName: 'Van Belgie',
+          _hasChildren: true,
         },
         {
-            firstName: 'Marie-Christine',
-            lastName: 'Leopoldine',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Marie-Christine',
+          lastName: 'Leopoldine',
+          _hasChildren: true,
         },
         {
-            firstName: 'Marie-Esmeralda',
-            lastName: 'Leopoldine',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Marie-Esmeralda',
+          lastName: 'Leopoldine',
+          _hasChildren: true,
         },
         {
-            firstName: 'Alexander',
-            lastName: 'Van Belgie',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Alexander',
+          lastName: 'Van Belgie',
+          _hasChildren: true,
         },
         {
-            firstName: 'Marie-Christine',
-            lastName: 'Leopoldine',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Marie-Christine',
+          lastName: 'Leopoldine',
+          _hasChildren: true,
         },
         {
-            firstName: 'Marie-Esmeralda',
-            lastName: 'Leopoldine',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Marie-Esmeralda',
+          lastName: 'Leopoldine',
+          _hasChildren: true,
         },
         {
-            firstName: 'Alexander',
-            lastName: 'Van Belgie',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Alexander',
+          lastName: 'Van Belgie',
+          _hasChildren: true,
         },
         {
-            firstName: 'Marie-Christine',
-            lastName: 'Leopoldine',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Marie-Christine',
+          lastName: 'Leopoldine',
+          _hasChildren: true,
         },
         {
-            firstName: 'Marie-Esmeralda',
-            lastName: 'Leopoldine',
-            isOpen: false,
-            isChildren: true,
+          firstName: 'Marie-Esmeralda',
+          lastName: 'Leopoldine',
+          _hasChildren: true,
         },
       ],
     }
@@ -172,17 +113,56 @@ export default {
     domFooter.remove()
   },
   methods: {
-    isMenu (item) {
-      item.isOpen = !item.isOpen
-      item._children && item._children.length > 0 ? item.isChildren = true : item.isChildren = false
-    },
     sleep (ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     async callChildren (parent) {
       await this.sleep(1000);
-      return [
-      ]
+      let array = []
+      if (parent.lastName === 'Van Belgie1') {
+        array = [
+          {
+            firstName: 'Filip',
+            lastName: 'Van Belgie2',
+            _hasChildren: true,
+            _children: [],
+          },
+          {
+            firstName: 'Astrid',
+            lastName: 'Van Belgie',
+            _hasChildren: true,
+          },
+          {
+            firstName: 'Laurent',
+            lastName: 'Van Belgie',
+            _hasChildren: true,
+          },
+        ]
+      } else if (parent.lastName === 'Van Belgie2') {
+        array = [
+          {
+            firstName: 'Elisabeth',
+            lastName: 'Van Brabant',
+            _hasChildren: true,
+          },
+          {
+            firstName: 'Gabriel',
+            lastName: 'Boudwijn',
+            _hasChildren: true,
+          },
+          {
+            firstName: 'Emmanuel',
+            lastName: 'Van Belgie',
+            _hasChildren: true,
+          },
+          {
+            firstName: 'Eleonore',
+            lastName: 'Boudwijn',
+            _hasChildren: true,
+          },
+        ]
+      }
+      return array
     },
   }
 }
@@ -198,8 +178,7 @@ th.vue-ads-text-left {
 i.fa.fa-sort, i.fa.fa-sort-up, i.fa.fa-sort-down {
   color: #ffffff !important;
 }
-th.vue-ads-text-left:hover, i.fa.fa-sort:hover, 
-  i.fa.fa-sort-up:hover, i.fa.fa-sort-down:hover {
+th.vue-ads-text-left:hover, th.vue-ads-text-left:hover i {
   color: #000000 !important;
 }
 th.vue-ads-text-left > div.vue-ads-flex {
@@ -219,7 +198,6 @@ th.vue-ads-text-left > div.vue-ads-flex {
   letter-spacing: normal;
   vertical-align: middle;
   justify-content: center;
-  // color: rgba(0, 0, 0, 0.54);
   font-feature-settings: "liga";
   -ms-user-select: none;
   -moz-user-select: none;
@@ -229,6 +207,7 @@ th.vue-ads-text-left > div.vue-ads-flex {
 }
 .fa.fa-plus-square::before, .fa.fa-minus-square::before {
   font-size: 22px;
+  color: #00000099 !important;
   font: normal normal normal 22px/1 "Material Design Icons";
 }
 .fa.fa-sort::before, .fa.fa-sort-up::before, .fa.fa-sort-down::before {
