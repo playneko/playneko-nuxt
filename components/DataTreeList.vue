@@ -53,7 +53,6 @@ export default {
             firstName: 'Albert II',
             lastName: 'Van Belgie1',
             _hasChildren: true,
-            _children: [],
         },
         {
           firstName: 'Alexander',
@@ -103,10 +102,8 @@ export default {
       ],
     }
   },
-  created () {
-    this.rows.length = 10
-  },
   mounted() {
+    this.rows.length = 10
     const domFilter = this.$el.querySelector('.vue-ads-flex.vue-ads-py-3')
     const domFooter = this.$el.querySelector('.vue-ads-flex.vue-ads-m-2.vue-ads-px-0.vue-ads-text-xs')
     domFilter.remove()
@@ -125,7 +122,6 @@ export default {
             firstName: 'Filip',
             lastName: 'Van Belgie2',
             _hasChildren: true,
-            _children: [],
           },
           {
             firstName: 'Astrid',
@@ -172,17 +168,20 @@ export default {
 table.vue-ads-w-full th {
   width: 300px;
 }
+table.vue-ads-w-full > tbody > tr:hover {
+  background: #eeeeee;
+}
 th.vue-ads-text-left {
   color: #00000099 !important;
-}
-i.fa.fa-sort, i.fa.fa-sort-up, i.fa.fa-sort-down {
-  color: #ffffff !important;
 }
 th.vue-ads-text-left:hover, th.vue-ads-text-left:hover i {
   color: #000000 !important;
 }
 th.vue-ads-text-left > div.vue-ads-flex {
   display: unset !important;
+}
+i.fa.fa-sort, i.fa.fa-sort-up, i.fa.fa-sort-down {
+  color: #ffffff !important;
 }
 .fa.fa-plus-square::before, .fa.fa-minus-square,
   .fa.fa-sort::before, .fa.fa-sort-up::before,
@@ -231,5 +230,8 @@ th.vue-ads-text-left > div.vue-ads-flex {
 }
 .vue-ads-pr-2 {
   padding-right: 0px;
+}
+.vue-ads-bg-gray-100 {
+  background: #ffffff;
 }
 </style>
