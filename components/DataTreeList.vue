@@ -1,21 +1,33 @@
 <template>
-  <div>
-    <vue-ads-table-tree
-      :columns="columns"
-      :rows="rows"
-      :call-children="callChildren"
-    >
-      <template slot="lastName" slot-scope="props">
-        {{ props.columns.title }}
-      </template>
-      <template slot="firstName" slot-scope="props">
-        <a :href="`https://www.google.com/search?q=${props.row.firstName}+${props.row.lastName}`"
-        target="_blank">{{props.row.firstName}}</a>
-      </template>
-      <template slot="lastName" slot-scope="props">
-        {{ props.row.lastName }}
-      </template>
-    </vue-ads-table-tree>
+  <div class="container">
+    <div id="swipeScrollLeft" class="swipeScrollLeft">
+      <button id="left-button" @click="$swipeLeft($refs.content)">
+        swipe left
+      </button>
+    </div>
+    <div id="swipeScrollRight" class="swipeScrollRight">
+      <button id="right-button" @click="$swipeRight($refs.content)">
+        swipe right
+      </button>
+    </div>
+    <div id="content" ref="content" class="data_tree_container">
+      <vue-ads-table-tree
+        :columns="columns"
+        :rows="rows"
+        :call-children="callChildren"
+      >
+        <template slot="lastName" slot-scope="props">
+          {{ props.columns.title }}
+        </template>
+        <template slot="firstName" slot-scope="props">
+          <a :href="`https://www.google.com/search?q=${props.row.firstName}+${props.row.lastName}`"
+          target="_blank">{{props.row.firstName}}</a>
+        </template>
+        <template slot="lastName" slot-scope="props">
+          {{ props.row.lastName }}
+        </template>
+      </vue-ads-table-tree>
+    </div>
   </div>
 </template>
 
@@ -165,6 +177,30 @@ export default {
 </script>
 
 <style lang="scss">
+.container {
+  display: flex;
+}
+#swipeScrollLeft {
+  display: none;
+}
+.swipeScrollLeft, .swipeScrollRight {
+  width: 53px;
+  height: 460px;
+  z-index: 999;
+  opacity: 0.6;
+  position: absolute;
+  background: #ffffff;
+}
+.swipeScrollRight {
+  margin-left: 247px;
+}
+table.vue-ads-w-full {
+  width: 1000px;
+}
+.data_tree_container {
+  width: 300px;
+  overflow: auto;
+}
 table.vue-ads-w-full th {
   width: 300px;
 }
