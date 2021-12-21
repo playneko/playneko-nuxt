@@ -1,22 +1,20 @@
 export default (context, inject) => {
-  const scrollTo = (element, scrollPixels, duration) => {
+  const swipeScrollTo = (element, scrollPixels, duration) => {
     const scrollPos = element.scrollLeft;
     const scrollWidth = element.scrollWidth;
     const clientWidth = element.clientWidth;
-    const leftBtn = document.getElementById('scrollToleft');
-    const rightBtn = document.getElementById('scrollToRight');
+    const leftBtn = document.getElementById('swipeScrollLeft');
+    const rightBtn = document.getElementById('swipeScrollRight');
 
-    if (scrollPos + clientWidth === scrollWidth && scrollPixels > 0) {
-      // console.log('right end');
-      rightBtn.style.display = 'none';
-    } else {
-      rightBtn.style.display = 'block';
-    }
     if (scrollPos === 0 && scrollPixels < 0) {
-      // console.log('left end');
       leftBtn.style.display = 'none';
     } else {
       leftBtn.style.display = 'block';
+    }
+    if (scrollPos + clientWidth === scrollWidth && scrollPixels > 0) {
+      rightBtn.style.display = 'none';
+    } else {
+      rightBtn.style.display = 'block';
     }
     if ( !( (scrollPos === 0 || scrollPixels > 0) && (element.clientWidth + scrollPos === element.scrollWidth || scrollPixels < 0))) {
       const startTime = "now" in window.performance ? performance.now() : new Date().getTime();
@@ -34,14 +32,13 @@ export default (context, inject) => {
   }
 
   const swipeLeft = (content) => {
-    scrollTo(content, -300, 800);
+    swipeScrollTo(content, -300, 800);
   }
 
   const swipeRight = (content) => {
-    scrollTo(content, 300, 800);
+    swipeScrollTo(content, 300, 800);
   }
 
-  inject('scrollTo', scrollTo);
   inject('swipeLeft', swipeLeft);
   inject('swipeRight', swipeRight);
   context.$scrollTo = scrollTo;
